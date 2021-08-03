@@ -1,0 +1,32 @@
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+    - ~/.npm
+
+node_js:
+  - '12'
+
+git:
+  depth: 3
+
+script:
+  - yarn test
+
+notifications:
+  slack: workspace:token
+  email:
+    recipients:
+      - diegofcolunalopez@gmail.com
+    on_success: always
+    on_failure: always
+
+deploy:
+  provide: heroku
+  skip-cleanup: true
+  keep-history: true
+  api_key: $APIKEYHEROKU # desde heroku
+  app: travis-ci-backend
+  on:
+    repo: Diego-Luna/Travis-CI-Backend
